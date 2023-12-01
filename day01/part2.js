@@ -47,9 +47,10 @@ function parseInput(str) {
     const lines = str.split(/\r?\n/);
     return lines;
 }
-function regexMatches(str, regex) {
+function getRegexMatches(str, regex) {
     let matches = [];
     let match;
+    //Loop through regex matches
     while ((match = regex.exec(str)) !== null) {
         let number = match[0];
         let position = match.index;
@@ -72,7 +73,7 @@ function calculateSum(words, lines) {
     let regex = buildStringRegex(words);
     let total = 0;
     for (const line of lines) {
-        let matches = regexMatches(line, regex);
+        let matches = getRegexMatches(line, regex);
         let firstIndex = Infinity;
         let lastIndex = 0;
         let firstDigit = '';

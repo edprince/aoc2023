@@ -6,7 +6,7 @@ interface Word<T> {
     [Key: string]: T;
 }
 
-interface Match {
+interface RegexMatch {
     number: string;
     position: number;
 }
@@ -36,9 +36,10 @@ function parseInput(str: string) {
     return lines;
 }
 
-function regexMatches(str: string, regex: RegExp): Match[] {
+function getRegexMatches(str: string, regex: RegExp): RegexMatch[] {
     let matches = [];
     let match;
+    //Loop through regex matches
     while ((match = regex.exec(str)) !== null) {
         let number = match[0];
         let position = match.index;
@@ -63,7 +64,7 @@ function calculateSum(words: Word<string>, lines: string[]) {
     let regex = buildStringRegex(words);
     let total = 0;
     for (const line of lines) {
-        let matches = regexMatches(line, regex);
+        let matches = getRegexMatches(line, regex);
 
         let firstIndex = Infinity;
         let lastIndex = 0;
