@@ -7,3 +7,8 @@ to get the final digit. Can't just access `numbers[numbers.length - 1]` because 
 Part two then motivated a change in strategy, as doing replaces wouldn't work for things like `eightwo`. So swapped to using regular expressions, and built a list of matches from the regular expression executions, and then picked out the first and last based on index.
 
 There must be a way of combining the two regex's I used into one. I used `/[0-9]/g` for numeric matches and `/(one|two|three|four...)/g` for string matches.
+
+Yep - used the `|`... derp. I was even already using it, and I didn't clock it. Now the regex is:
+```
+/(([0-9])|(one|two|three|four...))/g
+```

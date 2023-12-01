@@ -56,20 +56,14 @@ function regexMatches(str: string, regex: RegExp): Match[] {
 //Build regex for finding string values e.g. 'one', 'two', 'three'
 function buildStringRegex(words: Word<string>) {
     let keys = Object.keys(words).join('|');
-    return RegExp(`(${keys})`, 'g');
+    return RegExp(`(([0-9])|(${keys}))`, 'g');
 }
 
 function calculateSum(words: Word<string>, lines: string[]) {
-    let numberRegex = RegExp('[0-9]', 'g');
-    let stringRegex = buildStringRegex(words);
-
+    let regex = buildStringRegex(words);
     let total = 0;
     for (const line of lines) {
-        let strMatches = regexMatches(line, stringRegex);
-        let numberMatches = regexMatches(line, numberRegex);
-        let matches: Array<Match>;
-        //Merge matches of numeric values and string values
-        matches = [...strMatches, ...numberMatches];
+        let matches = regexMatches(line, regex);
 
         let firstIndex = Infinity;
         let lastIndex = 0;
